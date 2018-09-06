@@ -1,0 +1,25 @@
+<br>
+ <a href="logout"><button>Log out</button></a> | 
+    <a href="/wedding"><button>Back to Wedding List</button></a>
+    <br><br>
+ @model List<Wedding>
+     <!-- the Model is one wedding object with rsvp list -->
+@{
+    foreach(var key in @Model){
+        <h3>@key.person1 & @key.person2 Wedding!!</h3>
+        <p>Date: @key.date.ToString("MMMM dd, yyyy")</p>
+        <p>At: @key.address</p>
+        <br>
+        <p>Guests:</p>
+        @foreach(var rsvp in key.RSVPs){
+        <ul>
+            <li> @rsvp.user.name @rsvp.user.lastname</li>
+        </ul>
+        }
+    }
+}
+
+
+<br>
+
+

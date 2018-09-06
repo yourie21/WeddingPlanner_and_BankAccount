@@ -1,0 +1,40 @@
+<br>
+<a href="logout"><button>Log out</button></a>  |  
+<a href="add"><button>Add a New Wedding</button></a>
+
+ @model List<Wedding>
+
+<h1>Welcome, @ViewBag.loggedinUser.name (ID: @ViewBag.loggedinUser.id) </h1> 
+<br>
+<table class="table">
+    <tr>
+        <th>Wedding</th>
+        <th>Date</th>
+        <th>Guests</th>
+        <th>Action</th>
+    </tr>
+    @foreach(var onewedding in @Model){
+    <tr>
+        <td><a href="wedding/@onewedding.id">@onewedding.person1 & @onewedding.person2</a></td>
+        <td>@onewedding.date.ToString("MMM dd, yyyy")</td>
+        <td>@onewedding.RSVPs.Count</td>
+        <!-- If loggedinUser is the creator of the wedding, delete link is available -->
+        @if(onewedding.UserId == ViewBag.loggedinUser.id){
+            <td><a href="delete/@onewedding.id"><button class="btn btn-primary btn-sm"> YOU CAN DELETE this wedding(Creator's view)</button> </a></td>
+        } else {
+            bool found = false;
+            @foreach(var rsvpRow in onewedding.RSVPs) {
+                @if(rsvpRow.UserId == ViewBag.loggedinUser.id) {
+                    found = true;
+                }
+            }
+            @if(found == true) {
+                <td><a href="unRSVP/@onewedding.id"><button class="btn btn-danger btn-sm">Un-RSVP </button></a></td>
+            } else {
+                <td><a href="RSVP/@onewedding.id"><button class="btn btn-success btn-sm">RSVP </button></a></td>
+            }
+        }
+    </tr>
+    }
+</table>
+

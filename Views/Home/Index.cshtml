@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Restuarant review</title>
+</head>
+<body>
+<h3>Let's Make an Account!</h3>
+@model Userlogin 
+
+    <h3>Register</h3>
+     <form asp-action="register" asp-controller="Home" method="post">
+    <ul>
+        <li>
+        Name:   <input type="text" asp-for="name">
+        <span asp-validation-for="name"></span>
+        </li>
+        <li>
+        <label asp-for="lastname"> Last Name: </label>
+        <input type="text" asp-for="lastname">
+        <span asp-validation-for="lastname"></span>
+        </li>
+
+        <li>
+        <label asp-for="email">Email: </label>
+        <input type="email" asp-for="email">
+        <span asp-validation-for="email"></span>
+
+        @ViewBag.email
+        </li>
+            <li>
+        <label asp-for="pw">Password: </label>
+        <input type="password" asp-for="pw">
+        <span asp-validation-for="pw"></span>
+        </li>
+            <li>
+        <label asp-for="cw">Confirm Password: </label>
+        <input type="password" asp-for="cw">
+        <span asp-validation-for="cw"></span>
+        </li>
+    </ul>
+    <button class="btn waves-effect waves-light" type="submit" name="submit">Submit</button>
+    </form>
+
+<h3>Already a user? </h3>
+<form asp-action="login" asp-controller="Home" method="post">
+    <ul>
+        @ViewBag.email2
+        <li>
+        <label>Email: </label>
+        <input type="email" name="email">
+        <span asp-validation-for="email"></span>
+
+        </li>
+        <li>
+        <label>Password: </label>
+        <input type="password" name="pw">
+        <span asp-validation-for="pw"></span>
+        </li>
+    </ul>
+    <button class="btn waves-effect waves-light" type="submit" name="submit">Submit</button>
+    </form>
+</body>
+</html>
